@@ -1,3 +1,5 @@
 # Purdue-Housing-Bot
-Uses Selenium and a webdriver to sign in to Purdue Housing (Duo Authenthication requires human input on a phone), and then navigates to the housing option menu and refreshes the page ever 3 seconds looking for Freida or Winifred Parker as well as Hillenbrand after which it will send a message in a Discord channel using a Discord Webhook Integration
 
+Uses Selenium and a webdriver to monitor the housing option menu after the user manually logs in. It will then constantly refresh the page, looking for acceptable housing options after which it will send a message in a Discord channel using a Discord Webhook Integration
+
+**NOTE:** During its busiest times, the housing option menu takes approximately 12 seconds to load, and another 20 to actually fetch the housing data. If this is the case, it's possible that the refersh rate of this script will be too aggressive to actually catch housing options. Use at your own risk, therefore, and modify to your own liking.
