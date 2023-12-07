@@ -6,19 +6,24 @@ from selenium.webdriver.common.by import By
 from discordwebhook import Discord
 from selenium.webdriver.chrome.options import Options
 
+# Function to log to the console and discord
+def log(message):
+    print(message)
+    discord.post(content=message)
+
 try:
     # Load in the important variables
     discordURL = input("Enter Discord Webhook URL: ")
 
     # The tools we will use
+    global discord 
     discord = Discord(url = discordURL)
     chrome_options = Options()
     chrome_options.add_experimental_option("detach", True)
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 
     # Announce that we have begun
-    discord.post(content="Webhook Running")
-    print("Webhook Running")
+    log("Webhook Running")
 
     # State variables to prevent multiple notifications
     hilly = False
@@ -38,43 +43,43 @@ try:
     while (True):
         # Alerts for appearances and disappearances
         if "Hillenbrand" in driver.page_source and not hilly:
-            discord.post(content="Hilly Available!")
+            log("Hilly Available!")
             hilly == True
         if not ("Hillenbrand" in driver.page_source) and hilly:
-            discord.post(content="Hilly Gone!")
+            log("Hilly Gone!")
             hilly == False
 
         if "Winifred" in driver.page_source and not winifred:
-            discord.post(content="Winifred Available!")
+            log("Winifred Available!")
             winifred = True
         if not ("Winifred" in driver.page_source) and winifred:
-            discord.post(content="Winifred Gone!")
+            log("Winifred Gone!")
             winifred = False
 
         if "Frieda" in driver.page_source and not frieda:
-            discord.post(content="Frieda Available!")
+            log("Frieda Available!")
             frieda = True
         if not ("Frieda" in driver.page_source) and frieda:
-            discord.post(content="Frieda Gone!")
+            log("Frieda Gone!")
             frieda = False
 
         if "Cary" in driver.page_source and not cary:
-            discord.post(content="Cary Available!")
+            log("Cary Available!")
             cary = True
         if not ("Cary" in driver.page_source) and cary:
-            discord.post(content="Cary Gone!")
+            log("Cary Gone!")
             cary = False
         if "Hawkins" in driver.page_source and not hawkins:
-            discord.post(content="Hawkins Available!")
+            log("Hawkins Available!")
             hawkins == True
         if not ("Hawkins" in driver.page_source) and hawkins:
-            discord.post(content="Hawkins Gone!")
+            log("Hawkins Gone!")
             hawkins == False
         if "Earhart" in driver.page_source and not earehart:
-            discord.post(content="Earhart Available!")
+            log("Earhart Available!")
             earehart == True
         if not ("Earhart" in driver.page_source) and earehart:
-            discord.post(content="Earhart Gone!")
+            log("Earhart Gone!")
             earehart == False
 
         driver.refresh()
